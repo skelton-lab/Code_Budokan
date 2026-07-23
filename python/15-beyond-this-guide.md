@@ -58,6 +58,16 @@ Every topic here failed the capstone-impact test (`00-overview.md`'s ecosystem-b
 
 **Where to go next:** this series' own `docker/00-overview.md`, next in the stated sequencing.
 
+### Serving a model or a data pipeline: Flask, FastAPI
+
+**What it is:** Flask and FastAPI are Python *backend-only* web frameworks — no UI story at all, unlike Rails (companion: `rails/`) or a JavaScript full-stack framework. Flask is the older, deliberately minimal one: routing and request/response handling, with everything else (ORM, auth, validation) left to you. FastAPI is the newer alternative, built specifically to use Python's own type hints (Module 4's `dataclasses`/`typing` material, directly) for automatic request validation and auto-generated OpenAPI/Swagger docs, and it's async-native rather than async-optional the way Flask has traditionally been.
+
+**Why it matters here specifically:** the real-world case for either one, in this series' own context, is serving what Modules 9–14 already built — a trained PyTorch or Keras model, or `05-capstone-data-pipeline.md`'s own pipeline — as an HTTP endpoint, without rewriting any of that logic in another language. That's the actual reason "Python backend" is a common real pairing: the ML/data code is already Python, so the API layer staying Python avoids a second implementation of the same logic. The frontend that talks to it is very often a separate JavaScript project entirely — plain `fetch()` calls (Module 6 of `javascript/`, `07-server.md`) or a framework like Vue — since Flask/FastAPI have no opinion about what's on the other end of the HTTP request.
+
+**Contrast — the other industry-standard shape:** React + Next.js + Node is the mainstream *full-stack* JavaScript answer, and it solves a different problem than Flask/FastAPI do. Next.js is a framework built on top of React that adds server-side rendering and API routes, and those API routes run on Node underneath — meaning frontend and backend are one language, one project, start to finish. That's a genuinely different tradeoff from "Python backend, separate JS frontend": one language throughout versus reusing existing Python logic without a rewrite. Neither is more "correct" — they answer different questions about where a team's existing code already lives.
+
+**Where to go next:** [Flask's own quickstart](https://flask.palletsprojects.com/en/stable/quickstart/) or [FastAPI's tutorial](https://fastapi.tiangolo.com/tutorial/) — both are short enough to read end to end in under an hour, and FastAPI's tutorial in particular assumes exactly the type-hint fluency Module 4 already built.
+
 ### The wider ecosystem
 
 - **[Python documentation](https://docs.python.org/3/)** — the complete reference for everything this guide used (the iterator protocol, `dataclasses`, `typing`) in full depth beyond this guide's capstone-driven scope.

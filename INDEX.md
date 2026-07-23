@@ -145,9 +145,11 @@ Use the `StudyGuide` skill (`DesignCurriculum` → `WriteSession` → `VerifyGui
 
 **Guides completed, not open threads** — TypeScript (folded into `javascript/09-typescript.md`), PyTorch/Keras (folded into `python/` Modules 09–14), Docker, Pascal, Modula-2, COBOL, Scheme, Racket, Clojure, APL, OCaml, Haskell, Forth, Julia, Erlang, Go, Rust, and Rails. All fully executed against real toolchains; see the guide table above.
 
-**Queued candidates:** none remaining. `rails/` was the last one — see `ruby/09-beyond-this-guide.md`'s own "explicit placeholder for the supplementary discussion you mentioned wanting," now cashed in. Every guide named across this file's own history, from the original Fortran/6502/C/ALGOL run through the Lisp-family arc, the ML branch, Forth, Julia, Erlang, Go, Rust, and finally Rails, is complete, verified, and cross-referenced.
+**Queued candidates:** **PHP** — genuinely open, unlike every guide added above. Its case isn't a new paradigm (it's another dynamically-typed, C-family-influenced, multi-paradigm scripting language — territory `python/`, `ruby/`, and `javascript/` already cover three times over); it's the only major *web-native, template-embedded scripting language with real historical weight* not yet covered — 1995, originally "Personal Home Page Tools," still running a large share of the web (WordPress alone). Would sit near `javascript/`/`ruby/` in the pathway on that basis, not a paradigm basis. Needs its own `DesignCurriculum` pass before it's more than a name on this list.
 
-**This series is complete.** 28 guides, each verified by actually running its own code against a real, installed toolchain — no guide shipped on documentation alone. Starting a new one from here means a fresh `DesignCurriculum` pass on a language or framework not yet named anywhere in this file.
+`rails/` was the prior last one added — see `ruby/09-beyond-this-guide.md`'s own "explicit placeholder for the supplementary discussion you mentioned wanting," now cashed in. Every guide named across this file's own history, from the original Fortran/6502/C/ALGOL run through the Lisp-family arc, the ML branch, Forth, Julia, Erlang, Go, Rust, and finally Rails, is complete, verified, and cross-referenced.
+
+**This series is complete at 28 guides**, each verified by actually running its own code against a real, installed toolchain — no guide shipped on documentation alone. One candidate is already named above (PHP) and awaiting its own `DesignCurriculum` pass; starting anything else from here means naming a language or framework not yet mentioned anywhere in this file.
 
 ## Appendices
 
