@@ -1,0 +1,14 @@
+{
+  "name": "code-rookie-companion",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Gamified, self-actualization-oriented companion framework layered over the code-rookie polyglot study series. Static, no backend, LMS-portable.",
+  "scripts": {
+    "build": "node build/parse.mjs",
+    "serve": "node build/serve.mjs"
+  },
+  "devDependencies": {
+    "markdown-it": "^14.1.0"
+  }
+}

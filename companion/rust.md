@@ -1,0 +1,30 @@
+# Companion — Rust (Budokan Module 18)
+
+**Founding paper:** Matsakis, N.D. & Klock, F.S. (2014). "The Rust Language." *ACM SIGAda Ada Letters*, 34(3), 103–104. — sourced directly from the Code Budokan Reading Workbook, Strand C.
+
+## Historical note
+
+The Budokan workbook's own description is exact: two pages, and the ownership system described formally for the first time — every value has exactly one owner; ownership can be borrowed, not copied; when the owner goes out of scope, the value is dropped. No garbage collector needed. No dangling pointers possible. What makes this paper worth reading precisely rather than taking on faith is the sixty-year gap it names directly: C (Module 4, 1972) gave the programmer direct, unmediated access to memory, and every language since has had to decide what to do about the real bugs that access makes possible — a garbage collector (Java, Go, Python), giving up manual control entirely; or nothing at all (C itself), leaving the programmer fully responsible. Rust's own answer, verified throughout `rust/01-ownership-and-moves.md` and `rust/02-borrowing-and-the-borrow-checker.md`, is a third position: enforce the discipline a careful C programmer already tries to hold in their head — one owner, no aliased mutation — as a real, compiler-checked rule, with zero runtime cost once compiled, rather than either a runtime garbage collector or the programmer's own unaided vigilance.
+
+`rust/09-capstone-concurrent-counter-data-race.md` makes the paper's own two-page claim concrete and checkable rather than asserted: a genuine, unsynchronized data race — the exact bug class C's own compiler would compile without complaint — was verified directly to produce three real compile errors and **no binary at all**. Sixty years after C first handed programmers direct memory access with no enforced discipline, Matsakis and Klock's two pages describe the rule that finally closed the gap formally, and this guide's own Capstone 3 is a working demonstration of that rule holding in a real, adversarial test, not a description of what the rule is supposed to do.
+
+## Reflection prompts
+
+- The Budokan workbook's own reflection prompt asks directly: "why did it take 60 years after C for someone to formalise this?" Read `c/00-overview.md`'s own framing of C's sanitizer flags as "the closest thing C has to the safety net a compiler gives you for free in a higher-level language" — what does it mean that Rust's own answer arrived not as a runtime tool (like a sanitizer) but as a compile-time rule with the sanitizer's own detection power, minus the need to actually run the buggy path first?
+- `rust/00-overview.md` names Rust's central pitch as a "sharper guarantee" than Go's own runtime `-race` detector, verified directly with the identical data-race bug rejected before compiling versus caught only after running. What does "sharper" cost, precisely — what could a runtime detector catch that a static, compile-time rule structurally cannot?
+
+## Short-answer questions
+
+1. **What three ownership rules does the Matsakis & Klock paper describe formally for the first time, per the Budokan workbook's own summary?** Every value has exactly one owner; ownership can be borrowed but not copied; when the owner goes out of scope, the value is dropped automatically.
+2. **What real, verified experiment does `rust/09-capstone-concurrent-counter-data-race.md` run to make this paper's own claim checkable rather than assumed?** A deliberately unsynchronized shared counter, incremented from multiple threads with no `Arc`/`Mutex` anywhere — verified directly to produce three separate real compile errors (`E0373`, `E0499`, `E0502`) and no binary produced at all.
+3. **What's the precise, sixty-year gap this companion's historical note draws between C (Module 4) and Rust (Module 18)?** C gave programmers direct, unmediated memory access in 1972 with no enforced discipline beyond the programmer's own care; Rust's 2014 paper formalizes, as a compiler-checked rule with zero runtime cost, the exact discipline a careful C programmer already tries to hold in their own head manually.
+4. **How does Rust's own compile-time guarantee compare to Go's runtime `-race` detector, verified directly in `rust/00-overview.md`?** Go's `-race` detector catches the identical class of data-race bug, but only after compiling and running the program, and only if a developer remembers to invoke it; Rust's borrow checker rejects the equivalent unsynchronized-access program before a binary exists at all, with no special flag required.
+
+## Links into the guide
+
+- [`rust/01-ownership-and-moves.md`](../rust/01-ownership-and-moves.md) and [`rust/02-borrowing-and-the-borrow-checker.md`](../rust/02-borrowing-and-the-borrow-checker.md) — the ownership/borrowing rules this paper formalizes, verified directly with real `E0382`/`E0499` compile errors.
+- [`rust/09-capstone-concurrent-counter-data-race.md`](../rust/09-capstone-concurrent-counter-data-race.md) — the paper's own claim ("no dangling pointers possible... enforced at compile time") tested against a real, adversarial data-race attempt.
+
+## Cross-thread connection
+
+The Budokan workbook's own master table pairs Rust with Shinn et al.'s 2023 Reflexion paper — "ownership of memory → ownership of action." The pairing is genuinely suggestive rather than mechanically identical: Rust's ownership system assigns exactly one clear owner responsible for a piece of memory at any given moment, eliminating a whole class of bugs caused by ambiguous or shared responsibility; Reflexion's own architecture (an agent that critiques its own failed attempts and revises before trying again) is a different kind of "single responsible party" — the agent itself owns both the action and the reflection on that action's own failure, rather than diffusing responsibility across an external supervisor. Both are, in their own domains, answers to the same underlying question: what happens when responsibility for a resource (memory; a task) is left ambiguous.

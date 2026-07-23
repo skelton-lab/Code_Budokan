@@ -1,0 +1,17 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "js-guide-dom-demo",
+      "runtimeExecutable": "bun",
+      "runtimeArgs": ["run", "/tmp/jstest/staticserver.js"],
+      "port": 8934
+    },
+    {
+      "name": "companion-app",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["/Users/anthonyskelton/Claude/code-rookie/companion/build/serve.mjs"],
+      "port": 8080
+    }
+  ]
+}

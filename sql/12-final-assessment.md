@@ -1,0 +1,31 @@
+# Final Assessment
+
+Across all eleven modules. Try each on paper first — no `sqlite3`.
+
+1. What does a declared column type mean in SQLite by default, and what did inserting `'not a number'` into an `INTEGER`-affinity column actually do, verified directly?
+2. What's the precise rule governing whether a deleted `INTEGER PRIMARY KEY` value gets reused by the next insert, and what real mistake in this guide's own first draft did verifying it catch?
+3. What happens, precisely, when `DELETE FROM table;` runs with no `WHERE` clause?
+4. Given the customers/orders schema (Alice: 2 orders, Bob: 2 orders, Carol: 0 orders, one unassigned guest order), what are the verified row counts for `INNER`, `LEFT`, `RIGHT`, and `FULL OUTER JOIN` on the same `ON` condition?
+5. What did `EXPLAIN QUERY PLAN` report before and after creating an index on a 1,000,000-row table's filtered column, and what was the measured timing difference?
+6. Why did that same index show *no* change in `EXPLAIN QUERY PLAN`'s output when applied to Capstone 2's four-row join, and what does that contrast actually teach?
+7. What's the difference between `RANK()` and `DENSE_RANK()` for the row immediately following a tie?
+8. What are the two parts of a `WITH RECURSIVE` CTE, and what earlier guide's construct shares its exact structural shape?
+9. When a statement inside an open `BEGIN`/`COMMIT` transaction fails a `CHECK` constraint, what happens to the transaction and to statements that already succeeded earlier in it?
+10. What does `PRAGMA foreign_keys` report on a brand-new connection by default, and why does that matter for every `REFERENCES` clause written in Modules 4–8?
+11. In Capstone 4's bank transfer, what was the actual, verified state of the system's total money the moment the debit succeeded but the credit failed — and what fixed it?
+12. Name the one genuine, unforced cross-guide connection this guide's overview made to the Prolog guide, and state the actual shared ancestry, not just that both guides mention the same word.
+
+## Answers
+
+1. Something weaker than a guarantee — an affinity, a preference for how to store a value when a lossless conversion is possible. Verified directly: `'not a number'` inserted into an `INTEGER`-affinity column was stored exactly as given, with `typeof()` reporting `text`, not rejected and not force-converted.
+2. New rowids are always "one more than whatever's currently the highest row present" — recomputed fresh each time, not a persistent high-water mark. This guide's own first draft claimed a deleted rowid is never reused at all; verifying it directly showed that's only true when the deleted row wasn't the current maximum — deleting the *maximum* row does cause the next insert to reuse it, which the guide caught and corrected before shipping.
+3. Every row in the table is deleted, unconditionally and silently — no confirmation, no error, no partial effect. The statement is entirely valid SQL; nothing distinguishes "correctly decided to delete everything" from "forgot the condition."
+4. Inner = 3 (only genuinely matched rows), left = 4 (adds Carol, still drops the guest order), right = 4 (adds the guest order, drops Carol), full = 5 (both unmatched rows survive simultaneously) — verified directly, same schema, same `ON` condition throughout.
+5. Before: `SCAN big` (every row read and checked), `0.013s`. After: `SEARCH big USING INDEX idx_val` (jump directly to matching rows), `~0.0001s` — roughly a 130× measured speedup, identical query and answer both times.
+6. Because SQLite's query planner already chose a genuinely efficient plan on a five-row table (scan the small `orders` table, look up each customer directly by primary key) and correctly declined to use the new index at all — an index changes real query plans at real data volumes (verified on 1,000,000 rows) but doesn't necessarily change anything on a handful of rows; checking with `EXPLAIN QUERY PLAN` beats assuming either way.
+7. `RANK()` leaves a gap after a tie equal to the number of tied rows (two rows tied at rank `2` push the next distinct value to rank `4`); `DENSE_RANK()` leaves no gap (the next distinct value gets rank `3`) — verified directly on a dataset with one tie.
+8. An anchor member (the base case, run once) and a recursive member (referring back to the CTE's own name, run repeatedly), combined with `UNION ALL`. The direct structural parallel is Prolog's recursive rule shape — a base-case clause plus a recursive clause (`ancestor(X,Y) :- parent(X,Y).` / `ancestor(X,Y) :- parent(X,Z), ancestor(Z,Y).`) — same two-part shape, different execution model.
+9. The failing statement itself is rejected, but the transaction is **not** automatically rolled back — every statement that already succeeded earlier in the same transaction stays applied, and the transaction remains open until an explicit `COMMIT` (accepting the partial state) or `ROLLBACK` (discarding it) is issued. Verified directly: a successful first `UPDATE` remained applied after a failing second `UPDATE`, with the partial state still visible via `SELECT` before any explicit resolution.
+10. `0` — foreign key enforcement is off by default on every new connection, verified directly, and doesn't persist across connections even after being explicitly turned on in an earlier session. Every `REFERENCES` clause written since Module 4 was, by this default, documenting intent rather than being enforced, unless the specific connection running a given query had explicitly run `PRAGMA foreign_keys = ON;` first.
+11. Verified directly: with the debit applied and the credit rejected, the system's total (`sum(balance)`) was `950`, not the correct `1050` — `$100` was temporarily unaccounted for, sitting in neither account. An explicit `ROLLBACK`, issued after detecting the failure, restored both balances to their pre-transfer values and the total back to `1050`.
+12. SQL and Prolog both trace to predicate logic — E.F. Codd's 1970 relational model and Robert Kowalski's logic programming share that ancestry, and Datalog (named as a signpost in both guides' Beyond This Guide modules) is literally the language sitting at the intersection: relational-algebra-complete and a restricted form of Prolog simultaneously, not two unrelated paradigms that happen to both use tables of facts.

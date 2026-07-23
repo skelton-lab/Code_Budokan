@@ -1,0 +1,36 @@
+{
+  "$comment": "Generic per-module reflection card. Authored once, applied to every module by the app. Optional; never gates progress. The app persists answers to localStorage and folds them into the exportable journal + final overview report.",
+  "version": 1,
+  "prompts": [
+    {
+      "id": "clicked",
+      "type": "text",
+      "label": "What clicked?",
+      "placeholder": "The idea, syntax, or moment that suddenly made sense."
+    },
+    {
+      "id": "fought",
+      "type": "text",
+      "label": "What fought you?",
+      "placeholder": "Where you got stuck, what took several tries, what still feels shaky."
+    },
+    {
+      "id": "surprised",
+      "type": "text",
+      "label": "What surprised you?",
+      "placeholder": "Something unexpected — a gotcha, a design choice, a difference from a language you already know."
+    },
+    {
+      "id": "coaching",
+      "type": "text",
+      "label": "Coaching notes (paste anything worth keeping)",
+      "placeholder": "Paste a snippet of the Socratic dialogue with your LLM that helped — or a realisation from it. This becomes part of your portfolio.",
+      "long": true
+    }
+  ],
+  "ratings": [
+    { "id": "confidence", "label": "Confidence", "min": 1, "max": 5, "lowLabel": "Shaky", "highLabel": "Solid" },
+    { "id": "interest", "label": "Interest", "min": 1, "max": 5, "lowLabel": "Meh", "highLabel": "Hooked" },
+    { "id": "difficulty", "label": "Difficulty", "min": 1, "max": 5, "lowLabel": "Easy", "highLabel": "Hard" }
+  ]
+}

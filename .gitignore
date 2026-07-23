@@ -1,0 +1,15 @@
+# Stray LifeOS artifacts (unrelated to this project — see companion/00-overview.md history)
+$HOME/
+companion/$HOME/
+
+# Regenerable Python environment (see python/README.md — `uv sync` rebuilds it)
+python/.venv/
+python/.pytest_cache/
+python/.ruff_cache/
+__pycache__/
+
+# Regenerable Node environment (companion/ SPA build — `npm install` rebuilds it)
+node_modules/
+
+# macOS
+.DS_Store
