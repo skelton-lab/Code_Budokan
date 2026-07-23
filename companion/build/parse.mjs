@@ -24,6 +24,7 @@ const PATHWAY = [
   'algol', 'pascal', 'modula2', 'simula', 'smalltalk', 'cpp',
   'javascript', 'ruby',
   'prolog', 'sql',
+  'rails',
   'python', 'docker',
   'scheme', 'racket', 'clojure',
   'apl',
@@ -33,7 +34,6 @@ const PATHWAY = [
   'erlang',
   'go',
   'rust',
-  'rails',
 ];
 
 const md = new MarkdownIt({ html: false, linkify: true, typographer: false });
