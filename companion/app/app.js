@@ -290,14 +290,15 @@
       '<p class="page-sub">Read, run the code in <em>your own</em> editor, get coached by <em>your own</em> LLM — Socratically, not spoon-fed — reflect, and walk away with a portfolio and a sense of which language fits you. Not a certificate. Self-awareness.</p>' +
       '<div style="margin:6px 0 22px"><span class="stat xp"><b>' + xp + '</b>&nbsp;XP · Level ' + level(xp) + '</span> ' +
         '<span class="stat streak">🔥 <b>' + computeStreak() + '</b> day streak</span></div>' +
+      '<div class="gcard" data-nav="history" style="margin-bottom:26px;border-color:var(--accent-dim,#3a3f52)">' +
+        '<h3>📜 History of Computing — start here for the big picture</h3>' +
+        '<p>Babbage to the Transformer, seven eras. Not required before you dive into a language below — every guide links out to the relevant era right where it matters — but if you want the whole story first, this is it.</p></div>' +
       '<h2 style="font-size:16px;color:var(--text-dim);margin:0 0 12px">This pathway</h2>' +
       '<div class="card-grid">' + cards + '</div>' +
       '<h2 style="font-size:16px;color:var(--text-dim);margin:26px 0 12px">Beyond the pathway</h2>' +
       '<div class="card-grid">' +
         '<div class="gcard" data-nav="threads"><h3>🧵 Cross-language threads</h3>' +
         '<p>The same idea, traced across languages and decades — what makes this a survey, not a stack of unrelated courses.</p></div>' +
-        '<div class="gcard" data-nav="history"><h3>📜 History of Computing</h3>' +
-        '<p>Babbage to the Transformer, seven eras — the full document behind every guide\'s own historical-context panel.</p></div>' +
         '<div class="gcard" data-nav="appendix"><h3>🔌 AI Orchestration Appendix</h3>' +
         '<p>LangChain, LangGraph, n8n — and the 2025–2026 shift into harness, context, and skills. Dated the day it was written.</p></div>' +
       '</div>' +
