@@ -17,7 +17,7 @@ Each companion file follows the same shape:
 
 ## What's covered
 
-All 28 `code-rookie` guides now have a companion file. Twenty are covered by citations sourced directly from the Budokan workbook's own Strand C (or, for Assembly, its master appendix table); eight — Clojure, COBOL, Docker, Forth, Modula-2, OCaml, Rails, and Erlang's own precise module number — needed a citation independently supplied or transparently reconciled, since they either predate the workbook's own original module list or (Erlang) sit at a numbering inconsistency within the source document itself. Every file says which case it is, in its own opening line.
+All 29 `code-rookie` guides now have a companion file. Twenty are covered by citations sourced directly from the Budokan workbook's own Strand C (or, for Assembly, its master appendix table); nine — Clojure, COBOL, Docker, Forth, Modula-2, OCaml, Rails, PHP, and Erlang's own precise module number — needed a citation independently supplied or transparently reconciled, since they either predate the workbook's own original module list or (Erlang) sit at a numbering inconsistency within the source document itself. Every file says which case it is, in its own opening line.
 
 | File | Guide | Source |
 |---|---|---|
@@ -49,6 +49,7 @@ All 28 `code-rookie` guides now have a companion file. Twenty are covered by cit
 | [`forth.md`](forth.md) | [`forth/`](../forth/00-overview.md) | Not in original module list — citation independently supplied |
 | [`docker.md`](docker.md) | [`docker/`](../docker/00-overview.md) | Not a language; not in original module list — citation independently supplied |
 | [`rails.md`](rails.md) | [`rails/`](../rails/00-overview.md) | Not a language; not in original module list — no academic founding paper exists; closest equivalent independently supplied |
+| [`php.md`](php.md) | [`php/`](../php/00-overview.md) | Not in original module list — no academic founding paper exists; closest equivalent independently supplied |
 
 ## Three framing papers, read before any module
 

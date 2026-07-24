@@ -24,7 +24,7 @@ const PATHWAY = [
   'algol', 'pascal', 'modula2', 'simula', 'smalltalk', 'cpp',
   'javascript', 'ruby',
   'prolog', 'sql',
-  'rails',
+  'rails', 'php',
   'python', 'docker',
   'scheme', 'racket', 'clojure',
   'apl',
