@@ -21,7 +21,7 @@ const APPENDIX_DIR = path.join(CORPUS, 'appendix-ai-orchestration');
 // The full pathway, in the series' own stated teaching order (INDEX.md).
 const PATHWAY = [
   'fortran', 'cobol', '6502-asm', 'c',
-  'algol', 'pascal', 'modula2', 'simula', 'smalltalk', 'cpp',
+  'algol', 'pascal', 'modula2', 'simula', 'smalltalk', 'cpp', 'java',
   'javascript', 'ruby',
   'prolog', 'sql',
   'rails', 'php',
